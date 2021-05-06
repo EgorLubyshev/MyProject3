@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="str"><![CDATA[< - - - - - - - -]]></string>
+    <string name="str21"><![CDATA["Hello world!"]]></string>
+</resources>
