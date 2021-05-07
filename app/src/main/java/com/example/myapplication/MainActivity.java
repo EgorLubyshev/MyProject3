@@ -2,7 +2,9 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     public TextView c1, c2, c3, c4, a1, a2, a3, a4, textView, check;
+    Display display;
+    Point size;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,18 @@ public class MainActivity extends AppCompatActivity {
         a2=findViewById(R.id.answer2);
         a3=findViewById(R.id.answer3);
         a4=findViewById(R.id.answer4);
+
+        display = getWindowManager().getDefaultDisplay();
+        size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        a1.setWidth(width/4);
+        a2.setWidth(width/4);
+        a3.setWidth(width/4);
+        a4.setWidth(width/4);
+
 
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
