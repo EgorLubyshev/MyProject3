@@ -31,8 +31,8 @@
 
         <TextView
             android:id="@+id/answer1"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/ramka"
             android:gravity="center"
             android:foregroundGravity="right"
@@ -43,8 +43,8 @@
             />
         <TextView
             android:id="@+id/answer2"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/answer1"
             android:background="@drawable/ramka"
             android:gravity="center"
@@ -55,9 +55,9 @@
             />
         <TextView
             android:id="@+id/answer3"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_below="@+id/answer2"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/ramka"
             android:gravity="center"
             android:foregroundGravity="right"
