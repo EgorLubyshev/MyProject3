@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".lv2" />
+        <activity android:name=".lv3" />
     </application>
 
 </manifest>
