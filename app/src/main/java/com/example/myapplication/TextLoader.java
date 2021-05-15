@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 
 class TextLoader extends AsyncTask<String, Integer, Answer> {
     TextView textView;
-    static String str="";
+    String str="";
 
     public void TextViewLoader(TextView textView, String str) {
 
@@ -30,7 +30,8 @@ class TextLoader extends AsyncTask<String, Integer, Answer> {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         UserServers userServers = retrofit.create(UserServers.class);
-        Call<Answer> call = userServers.getUsers();
+
+        Call<Answer> call = userServers.getUsers("?id="+str);
 
         try {
             Response<Answer> response = call.execute();
@@ -58,7 +59,9 @@ class TextLoader extends AsyncTask<String, Integer, Answer> {
     interface UserServers {
 
         @GET("get_user.php")
-        Call<Answer> getUsers();
+        Call<Answer> getUsers(
+                @Query("id") String id
+        );
 
         @GET("set_user.php")
         Call<Answer> setUsers(
