@@ -17,11 +17,12 @@ import retrofit2.http.Query;
 
 class TextLoader extends AsyncTask<String, Integer, Answer> {
     TextView textView;
-    String str="";
+     int id;
 
-    public void TextViewLoader(TextView textView, String str) {
-
-    }
+     TextLoader(TextView textView, int id){
+         this.textView=textView;
+         this.id=id;
+     }
 
     @Override
     protected Answer doInBackground(String... strings) {
@@ -31,7 +32,7 @@ class TextLoader extends AsyncTask<String, Integer, Answer> {
                 .build();
         UserServers userServers = retrofit.create(UserServers.class);
 
-        Call<Answer> call = userServers.getUsers("?id="+str);
+        Call<Answer> call = userServers.getUsers(id);
 
         try {
             Response<Answer> response = call.execute();
@@ -60,7 +61,7 @@ class TextLoader extends AsyncTask<String, Integer, Answer> {
 
         @GET("get_user.php")
         Call<Answer> getUsers(
-                @Query("id") String id
+                @Query("id") int id
         );
 
         @GET("set_user.php")
@@ -98,3 +99,4 @@ class User {
         return id + ", " + login + ", " + password + ", " + mail;
     }
 }
+

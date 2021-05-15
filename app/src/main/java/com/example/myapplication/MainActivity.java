@@ -3,13 +3,25 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         a3=findViewById(R.id.answer3);
         a4=findViewById(R.id.answer4);
 
+        TextLoader textLoader = new TextLoader(textView, 7);
+        textLoader.execute("http://10.67.172.157/EgorLubyshev/");
+
         display = getWindowManager().getDefaultDisplay();
         size = new Point();
         display.getSize(size);
@@ -44,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         a2.setWidth(width/4);
         a3.setWidth(width/4);
         a4.setWidth(width/4);
-
 
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,14 +157,17 @@ public class MainActivity extends AppCompatActivity {
             answer.setText("");
         }
     }
-    void check(){
+    void check() {
         if (a1.getText().equals("print") && a2.getText().equals("  (") &&
-                a3.getText().equals("Hello world!") && a4.getText().equals("  )")){
+                a3.getText().equals("Hello world!") && a4.getText().equals("  )")) {
             Toast.makeText(this, "все верно!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), lv2.class);
             startActivity(intent);
-        }else {
+        } else {
             Toast.makeText(this, "Ошибка!", Toast.LENGTH_SHORT).show();
         }
+
+
+
     }
 }
