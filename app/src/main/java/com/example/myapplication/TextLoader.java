@@ -16,13 +16,13 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 class TextLoader extends AsyncTask<String, Integer, Answer> {
-    TextView textView;
-     int id;
+    int id;
+    TextView text;
 
-     TextLoader(TextView textView, int id){
-         this.textView=textView;
-         this.id=id;
-     }
+    TextLoader(TextView text,int id){
+        this.id=id;
+        this.text=text;
+    }
 
     @Override
     protected Answer doInBackground(String... strings) {
@@ -32,7 +32,7 @@ class TextLoader extends AsyncTask<String, Integer, Answer> {
                 .build();
         UserServers userServers = retrofit.create(UserServers.class);
 
-        Call<Answer> call = userServers.getUsers(id);
+        Call<Answer> call = userServers.getUsers();
 
         try {
             Response<Answer> response = call.execute();
@@ -48,9 +48,9 @@ class TextLoader extends AsyncTask<String, Integer, Answer> {
     @Override
     protected void onPostExecute(Answer answer) {
         if (answer != null) {
-            textView.setText(answer.getUsers());
+            text.setText( answer.getUsers());
         } else {
-            textView.setText("Ошибка");
+            text.setText( "Ошибка");
         }
 
 
@@ -59,10 +59,8 @@ class TextLoader extends AsyncTask<String, Integer, Answer> {
 
     interface UserServers {
 
-        @GET("get_user.php")
-        Call<Answer> getUsers(
-                @Query("id") int id
-        );
+        @GET("Egor/get_tasks.php")
+        Call<Answer> getUsers();
 
         @GET("set_user.php")
         Call<Answer> setUsers(
@@ -75,14 +73,14 @@ class TextLoader extends AsyncTask<String, Integer, Answer> {
 
 }
 
-class Answer {
+class       Answer {
     boolean status;
     ArrayList<User> data;
 
     String getUsers() {
         String res = "";
         for (User user : data) {
-            res += user.toString() + "\n";
+            res += user.toString() ;
 
         }
         return res;
@@ -91,12 +89,9 @@ class Answer {
 
 class User {
     int id;
-    String login, password, mail;
+    String text;
 
     @NonNull
     @Override
-    public String toString() {
-        return id + ", " + login + ", " + password + ", " + mail;
-    }
+    public String toString() { return text; }
 }
-

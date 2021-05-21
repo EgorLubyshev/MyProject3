@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -25,13 +29,16 @@ import retrofit2.http.Query;
 
 public class MainActivity extends AppCompatActivity {
 
-    public TextView c1, c2, c3, c4, a1, a2, a3, a4, textView, check;
+    public TextView c1, c2, c3, c4, a1, a2, a3, a4, textView, textView2 ,check;
     Display display;
     Point size;
+    String text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         textView=findViewById(R.id.text_view1);
         check=findViewById(R.id.check);
@@ -46,8 +53,7 @@ public class MainActivity extends AppCompatActivity {
         a3=findViewById(R.id.answer3);
         a4=findViewById(R.id.answer4);
 
-        TextLoader textLoader = new TextLoader(textView, 7);
-        textLoader.execute("http://10.67.172.157/EgorLubyshev/");
+        RandomLoad();
 
         display = getWindowManager().getDefaultDisplay();
         size = new Point();
@@ -59,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
         a2.setWidth(width/4);
         a3.setWidth(width/4);
         a4.setWidth(width/4);
+
+        c1.setWidth(width/4);
+        c2.setWidth(width/4);
+        c3.setWidth(width/4);
+        c4.setWidth(width/4);
 
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         c3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               c(c3);
+                c(c3);
             }
         });
         c4.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +129,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    void RandomLoad() {
+        TextLoad(textView, 1);
+
+    }
+
     void c(TextView c){
         if (a1.getText().equals("")){
             a1.setText(c.getText());
@@ -158,16 +175,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     void check() {
-        if (a1.getText().equals("print") && a2.getText().equals("  (") &&
-                a3.getText().equals("Hello world!") && a4.getText().equals("  )")) {
+        if (a1.getText().equals("print") && a2.getText().equals("(") &&
+                (a3.getText().equals("\"Hello World!\"")) || (a3.getText().equals("Hello World!"))
+                && a4.getText().equals(")")) {
             Toast.makeText(this, "все верно!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), lv2.class);
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, "Ошибка!", Toast.LENGTH_SHORT).show();
         }
-
-
+    }
+    void TextLoad(TextView text, int id ){
+        TextLoader textLoader = new TextLoader(text, id);
+        //textLoader.execute("http://192.168.100.5/EgorLubyshev/");
+        textLoader.execute("http://10.148.190.161/");
 
     }
 }
