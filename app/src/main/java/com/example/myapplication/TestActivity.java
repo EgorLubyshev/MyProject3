@@ -41,7 +41,6 @@ public class TestActivity extends AppCompatActivity {
         textView3.setText(task.variants.get(2));
         textView4.setText(task.variants.get(3));
         textView.setText(task.text);
-
         if (task.type==1){
             setContentView(R.layout.activity_main);
         }
